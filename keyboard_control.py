@@ -4,7 +4,7 @@ import pygame
 def init():
     pygame.init()
     # pygame needs a window to detect the inputs
-    window = pygame.display.set_mode((1280, 540))
+    window = pygame.display.set_mode((360, 240))
 
 
 def getkey(keyname):
