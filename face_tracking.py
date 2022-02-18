@@ -29,6 +29,7 @@ def findFace(Image):
     myFaceListC = []
     myFaceListArea = []
 
+    # too find the center of the face and create the frame
     for (x, y, w, h) in faces:
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cx = x + w // 2
@@ -72,6 +73,7 @@ def trackFace(drone, info, w, pid, pError):
 # cap = cv2.VideoCapture(0)
 
 while True:
+    # use of the webcam for testing with unstable wireless connection
     # _, image = cap.read()
     image = drone.get_frame_read().frame
     image = cv2.resize(image, (w, h))
@@ -79,6 +81,8 @@ while True:
     pError = trackFace(drone, info, w, pid, pError)
     # print("Area", info[1], "Center", info[0])
     cv2.imshow("Camera feed", image)
+    # 0xFF is a bit mask which sets the left 24 bits to zero
+    #  ord() returns a value between 0 and 255
     if cv2.waitKey(1) and 0xFF == ord('q'):
         drone.land()
         break
